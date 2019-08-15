@@ -1,0 +1,361 @@
+:root {
+	--header-open-color: var( --background-color );
+	--header-close-color: rgba( 255, 255, 255, 1 );
+	
+	--header-open-text-shadow: 0 0 1px transparent;
+	--header-close-text-shadow: 0 0 1px var( --text-shadow-color );
+}
+
+.button.open-section, 
+.button.close-section {
+	position: absolute; transform: translateX( -50% );
+}
+
+.main, 
+.open .main {
+	transform: translateY( 50px );
+	opacity: 0;
+}
+
+.button.close-section, 
+.open .button.close-section, 
+.close .button.open-section {
+	left: -10000px; opacity: 0;
+}
+
+.header .button.open-section {
+	color: inherit;
+	text-shadow: inherit;
+}
+
+.header .button.open-section:hover {
+	color: var( --header-open-color );
+	border-color: var( --header-close-color );
+	text-shadow: none;
+}
+
+.button.close-section {
+	margin-bottom: 0;
+}
+
+.feature-image {
+	display: none;
+}
+
+
+
+
+.section, .header, .header .cover-image, .button.open-section, .main, .button.close-section {
+	animation-duration: 0.4s; animation-fill-mode: forwards;
+}
+
+.section, .main {
+	animation-duration: 0.7s;
+}
+
+
+
+
+/* .open .button.open-section {
+	color: var( --header-close-color );
+	border-color: var( --header-close-color );
+} */
+
+.section.open {
+	animation-name: open-section; animation-delay: 0.45s;
+}
+
+.open .header {
+	animation-name: header-open-change-color, header-open-change-text-shadow; animation-delay: 0.25s;
+}
+
+.open .cover-image {
+	animation-name: translateUp; animation-delay: 0.25s;
+}
+
+.open .button.open-section {
+	animation-name: fade-out, /* header-open-button-open-change-color, header-open-change-text-shadow, */ move-out; 
+	animation-delay: 0.5s, /* 0.25s, 0.25s, */ 0.9s; animation-duration: 0.4s, /* 0.4s, */ 0.005s;
+}
+
+.open .button.close-section {
+	animation-name: move-in, fade-in; animation-delay: 0.9s, 0.95s; animation-duration: 0.005s, 0.4s;
+}
+
+.open .main {
+	animation-name: fade-in, translateUpMain; animation-delay: 0.75s;	
+}
+
+
+
+
+.button.open-section, 
+.open .button.open-section, 
+.close .button.close-section {
+	left: 50%; opacity: 1;
+}
+
+.close .header {
+	color: var( --header-open-color );
+	text-shadow: 0 0 1px transparent;
+}
+
+/* .close .button.open-section {
+	color: var( --header-open-color );
+	border-color: var( --header-open-color );
+} */
+
+.close .main {
+	transform: translateY( 0 );
+	opacity: 1;
+}
+
+
+
+.section.close, .close .header, .close .button.open-section, .close .header .cover-image, .close .main {
+	animation-duration: 0.4s; animation-fill-mode: forwards;
+}
+
+.close .header {
+	animation-name: header-close-change-color, header-close-change-text-shadow; animation-delay: 0.4s;
+}
+
+.close .main {
+	animation-name: fade-out, translateDownMain; animation-delay: 0s;
+}
+
+.close .button.open-section {
+	animation-name: move-in, fade-in, header-close-button-open-change-color; animation-delay: 0s, 1s, 0.25s; animation-duration: 0.005s, 0.4s, 0.4s;
+}
+
+.close .button.close-section {
+	left: 50%; opacity: 1;
+	animation-name: fade-out, move-out; animation-delay: 0s, 0.4s; animation-duration: 0.4s, 0.005s;
+}
+
+.close .header .cover-image {
+	transform: translateY( -14rem );
+	animation-name: translateDown; animation-delay: 0.4s;
+}
+
+.section.close {
+	animation-name: close-section; animation-delay: 0.5s; animation-duration: 0.7s;
+}
+
+.close .button.open-section:hover {
+	color: var( --header-open-color );
+}
+
+
+@keyframes open-section {
+	
+	0% {
+		height: var( --header-height );
+	}
+	
+	100% {
+		height: var( --section-full-height );
+	}
+	
+}
+
+@keyframes close-section {
+	
+	0% {
+		height: var( --section-full-height );
+	}
+	
+	100% {
+		height: var( --header-height );
+	}
+	
+}
+
+/* @keyframes remove-text-shadow {
+	
+	0% {
+		text-shadow: 0 0 1px var( --text-shadow-color );
+	}
+	
+	100% {
+		text-shadow: 0 0 1px transparent;
+	}
+	
+} */
+
+@keyframes header-open-change-text-shadow {
+	
+	0% {
+		text-shadow: var( --header-close-text-shadow );
+	}
+	
+	100% {
+		text-shadow: var( --header-open-text-shadow );
+	}
+	
+}
+
+@keyframes header-close-change-text-shadow {
+	
+	0% {
+		text-shadow: var( --header-open-text-shadow );
+	}
+	
+	100% {
+		text-shadow: var( --header-close-text-shadow );
+	}
+	
+}
+
+@keyframes header-close-change-color {
+	
+	0% {
+		color: var( --header-open-color );
+	}
+	
+	100% {
+		color: var( --header-close-color );
+	}
+	
+}
+
+/* @keyframes header-close-button-open-change-color {
+	
+	0% {
+		color: var( --header-open-color );
+		border-color: var( --header-open-color );
+	}
+	
+	100% {
+		color: var( --header-close-color );
+		border-color: var( --header-close-color );
+	}
+	
+}
+
+@keyframes header-open-button-open-change-color {
+	
+	0% {
+		color: var( --header-close-color );
+		border-color: var( --header-close-color );
+	}
+	
+	100% {
+		color: var( --header-open-color );
+		border-color: var( --header-open-color );
+	}
+	
+} */
+
+@keyframes header-open-change-color {
+	
+	0% {
+		color: var( --header-close-color );
+	}
+	
+	100% {
+		color: var( --header-open-color );
+	}
+	
+}
+
+@keyframes translateUpMain {
+	
+	0% {
+		transform: translateY( 50px );
+	}
+	
+	100% {
+		transform: translateY( 0 );
+	}
+	
+}
+
+@keyframes translateUp {
+	
+	0% {
+		transform: translateY( 0 );
+	}
+	
+	100% {
+		transform: translateY( -14rem );
+	}
+	
+}
+
+@keyframes translateDownMain {
+	
+	0% {
+		transform: translateY( 0 );
+	}
+	
+	100% {
+		transform: translateY( 50px );
+	}
+	
+}
+
+@keyframes translateDown {
+	
+	0% {
+		transform: translateY( -14rem );
+	}
+	
+	100% {
+		transform: translateY( 0 );
+	}
+	
+}
+
+@keyframes translate-down {
+	
+	0% {
+		transform: translateY( calc( -1 * var( --wrapper-translate ) ) );
+	}
+	
+	100% {
+		transform: translateY( 0 );
+	}
+	
+}
+
+@keyframes move-out {
+	
+	/* 0% {
+		position: relative; left: 0;
+	} */
+	
+	100% {
+		left: -10000px;
+	}
+	
+}
+
+@keyframes move-in {
+	
+	/* 0% {
+		position: absolute; left: -10000px; 
+	} */
+	
+	100% {
+		left: 50%;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

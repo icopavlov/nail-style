@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang= "en">
+<head>
+	<title>nailstyle-narrow-44-04</title>
+	<meta charset= "UTF-8" />
+	<meta name= "viewport" content= "width=device-width, initial-scale=1" />
+	<meta name= "description" content= "nailstyle-narrow-44-01">
+</head>
+
+<body>
+
+<header></header>
+<main>
+	<section id= "slider" class= "section"></section>
+	<section id= "about" class= "section toggleable"></section>
+	<section id= "services" class= "section toggleable"></section>
+	<section id= "contact-info" class= "section toggleable"></section>
+	<section id= "send-email" class= "section"></section>
+</main>
+<footer></footer>
+
+<!-- jQuery -->
+<script src= "js/jquery-3.2.0.min.js" type= "text/javascript"></script>
+
+<!-- Handlebars -->
+<script src= "js/handlebars/handlebars-v4.0.12.js"></script>
+<script src= "js/handlebars-template-loading.js" type= "text/javascript"></script>
+<!-- Content files -->
+<script src= "content/constants.js" type= "text/javascript"></script>
+<script src= "content/header-context.js" type= "text/javascript"></script>
+<script src= "content/slider-context.js" type= "text/javascript"></script>
+<script src= "content/about-context.js" type= "text/javascript"></script>
+<script src= "content/services-context.js" type= "text/javascript"></script>
+<script src= "content/contact-info-context.js" type= "text/javascript"></script>
+<script src= "content/send-email-context.js" type= "text/javascript"></script>
+<script src= "content/footer-context.js" type= "text/javascript"></script>
+
+<!-- Header template -->
+<script id= "header-template" type= "text/x-handlebars-template">
+	<h1 class= "logo"><a href= "#slider">{{title}}</a></h1>
+	
+	<nav id= "main-nav">
+		<h6>{{mainNav.title}}</h6>
+		<ul class= "nav">
+			{{#each mainNav.links}}
+				<li><a href= "#{{target}}">{{label}}</a></li>
+			{{/each}}
+			<a class= "button close-nav" href= "#"></a>
+		</ul>
+		<a class= "button open-nav" href= "#"></a>
+	</nav>
+	
+	<a class= "button scroll-to-top" href= "header">Up</a>
+	
+	<section id= "quick-contact">
+		<h6>{{quickContact.title}}</h6>
+		<section class= "quick-contact-items">
+			{{#each quickContact.items}}
+				<dl class= "entry {{classValue}}">
+					<dt class= "label">{{values.label}}</dt>
+					<dd class= "value">{{values.value}}</dd>
+					<dd class= "text">{{text}}</dd>
+				</dl>
+			{{/each}}
+		</section>
+	</section>
+</script>
+
+
+<!-- Slider template -->
+<script id= "slider-template" type= "text/x-handlebars-template">
+	<h2 class= "section-title">{{title}}</h2>
+	
+	<ol class= "content">
+		{{#each slides}}
+			<li class= "slide {{classValue}}">
+				<h4 class= "sup-title">{{subtitle}}</h4>
+				<h3 class= "title">{{title}}</h3>
+				<p class= "description">{{text}}</p>
+				<a class= "button go-to-target" data-target-selector= "{{targetSelector}}" href= "#">{{../buttonText}}</a>
+				<figure class= "cover-image" style= "background-image: url( ./images/slider/{{image.source}} )">
+					<img src= "images/slider/{{image.source}}" alt= "" />
+				</figure>
+			</li>
+		{{/each}}
+	</ol>
+	
+	<!-- <section class= "controls">
+		<ol class= "random-access">
+			{{#each slides}}
+				<li><button></button></li>
+			{{/each}}
+		</ol>
+	</section> -->
+</script>
+
+
+<!-- About template -->
+<script id= "about-template" type= "text/x-handlebars-template">
+	<h2 class= "section-title">{{title}}</h2>
+	
+	<section class= "body">
+		<section class= "header">
+			<h3 class= "title">{{title}}</h3>
+			{{#each header.paragraphs}}
+				<p class= "description">{{this}}</p>
+			{{/each}}
+			<a class= "button open-section" href= "#">{{buttonOpenText}}</a>
+			<figure class= "cover-image" style= "background-image: url( ./images/about/{{header.image.source}} )">
+				<img src= "images/about/{{header.image.source}}" alt= "" />
+			</figure>
+		</section>
+		
+		<section class= "main">
+			<figure class= "feature-image" style= "background-image: url( ./images/about/{{header.image.source}} )">
+				<img src= "./images/about/{{header.image.source}}" alt= "" />
+			</figure>
+			
+			<a class= "button close-section" href= "#">{{buttonCloseText}}</a>
+			
+			<article class= "content">
+				<h3 class= "title">{{title}}</h3>
+				<p class= "description">{{header.text}}<p>
+				
+				<!-- <figure class= "feature-image" style= "background-image: url( ./images/about/{{header.image.source}} )">
+					<img src= "./images/about/{{header.image.source}}" alt= "" />
+				</figure> -->
+				
+				{{#each main.articles}}
+					<h4 class= "sub-title">{{title}}</h4>
+					{{#each paragraphs}}
+						{{#if text}}
+							<p>{{text}}</p>
+						{{/if}}
+						{{#if list}}
+							<ul>
+								{{#each list}}
+									<li>{{this}}</li>
+								{{/each}}
+							</ul>
+						{{/if}}
+					{{/each}}
+				{{/each}}
+			</article>
+		</section>
+	</section>
+</script>
+
+<!-- Services template -->
+<script id= "services-template" type= "text/x-handlebars-template">
+	<h2 class= "section-title">{{title}}</h2>
+	
+	<ul class= "service-groups-array body">
+		{{#each serviceGroups}}
+			<li class= "service-group {{className}}">
+				<section class= "header">
+					<h3 class= "title">{{../title}}</h3>
+					{{#each header.paragraphs}}
+						<p class= "description">{{this}}</p>
+					{{/each}}
+					<a class= "button open-section" href= "#">{{../openButton.text}}</a>
+					<figure class= "cover-image" style= "background-image: url( ./images/services/{{header.image.source}} )">
+						<img src= "images/services/{{header.image.source}}" alt= "" />
+					</figure>
+				</section>
+				
+				<section class= "main">
+					<figure class= "feature-image" style= "background-image: url( ./images/services/{{header.image.source}} )">
+						<img src= "./images/services/{{header.image.source}}" alt= "" />
+					</figure>
+					
+					<a class= "button close-section" href= "#">{{../closeButton.text}}</a>
+					
+					<article class= "content">
+						<h3 class= "title">{{../title}}</h3>
+						{{#each main.paragraphs}}
+							<p class= "description">{{this}}</p>
+						{{/each}}
+						
+						<!-- <figure class= "feature-image" style= "background-image: url( ./images/services/{{header.image.source}} )">
+							<img src= "./images/services/{{header.image.source}}" alt= "" />
+						</figure> -->
+						
+						<ol class= "services-array">
+							{{#each main.services}}
+								<li class= "service">
+									<h4 class= "service-title">{{title}}</h4>
+									<a href= "#" class= "button open-service">{{../../openButton.text}}</a>
+									<article class= "service-info">
+										<h5 class= "service-title">{{title}}</h5>
+										{{#each paragraphs}}
+											<p>{{this}}</p>
+										{{/each}}
+										<a class= "button close-service" href= "#">{{../closeButton.text}}</a>
+									</article>
+									<!-- <figure class= "cover-image" style= "background-image: url( ./images/services/{{image.source}} )">
+										<img src= "images/services/{{image.source}}" alt= "" />
+									</figure> -->
+								</li>
+								
+								<!-- <li class= "service">
+									<article class= "service-header">
+										<h4 class= "service-title">{{title}}</h4>
+										<a href= "#" class= "button open-service">{{../../openButton.text}}</a>
+										<figure class= "cover-image" style= "background-image: url( ./images/services/{{image.source}} )">
+											<img src= "images/services/{{image.source}}" alt= "" />
+										</figure>
+									</article>
+									
+									<article class= "service-info">
+										<h4 class= "service-title">{{title}}</h5>
+										{{#each paragraphs}}
+											<p>{{this}}</p>
+										{{/each}}
+										<a class= "button close-service" href= "#">{{../closeButton.text}}</a>
+									</article>
+								</li> -->
+							{{/each}}
+						</ol>
+					</article>
+				</section>
+			</li>
+		{{/each}}
+	</ul>
+</script>
+
+<!-- Contact info template -->
+<script id= "contact-info-template" type= "text/x-handlebars-template">
+	<h2 class= "section-title">{{title}}</h2>
+	
+	<section class= "body">
+		<section class= "header">
+			<h3 class= "title">{{title}}</h3>
+			{{#each header.paragraphs}}
+				<p class= "description">{{this}}</p>
+			{{/each}}
+			<a class= "button open-section" href= "#">{{header.button.text}}</a>
+			<figure class= "cover-image" style= "background-image: url( ./images/contact-info/{{header.image.source}} )">
+				<img src= "images/contact-info/{{header.image.source}}" alt= "" />
+			</figure>
+		</section>
+		
+		<section class= "main">
+			<!-- <figure class= "feature-image" style= "background-image: url( ./images/contact-info/{{header.image.source}} )">
+				<img src= "./images/contact-info/{{header.image.source}}" alt= "" />
+			</figure> -->
+		
+			<a class= "button close-section" href= "#">{{main.button.text}}</a>
+			
+			<article class= "content">
+				<h3 class= "title">{{title}}</h3>
+				{{#each main.paragraphs}}
+					<p class= "description">{{this}}</p>
+				{{/each}}
+				
+				<figure class= "cover-image" style= "background-image: url( ./images/contact-info/{{main.image.source}} )">
+					<img src= "images/contact-info/{{main.image.source}}" alt= "" />
+				</figure>
+				
+				<section class= "controls">
+					<ol class= "random-access">
+						{{#each main.contactInfoItems}}
+							<li><button></button></li>
+						{{/each}}
+					</ol>
+				</section>
+				
+				<ol class= "contact-info-items">
+					{{#each main.contactInfoItems}}
+						<li class= "slide {{classValue}}">
+							<h3 class= "title">{{title}}</h3>
+							{{#each text}}
+								<p class= "description">{{this}}</p>
+							{{/each}}
+							
+							<section class= "info">
+								{{#each values}}
+									<dl class= "values">
+										{{#if label}}
+											<dt class= "label">{{label}}</dt>
+										{{/if}}
+										<dd class= "value">{{value}}</dd>
+									</dl>
+								{{/each}}
+								<p class= "text">Integer quis porta turpis</p>
+							</section>
+						</li>
+					{{/each}}
+				</ol>
+			</article>
+		</section>
+	</section>
+</script>
+
+
+<!-- Send email template -->
+<script id= "send-email-template" type= "text/x-handlebars-template">
+	<h2 class= "section-title">{{title}}</h2>
+	
+	<section class= "body">
+		<form action= "" method= "post">
+			{{#each fields}}
+				<dl class= "field {{classValue}}">
+					<dt><label>{{label}}</label></dt>
+					<dd>
+						{{#if isTextarea}}
+							<textarea name= "{{classValue}}"></textarea>
+						{{else}}
+							{{#if isSubmit}}
+								<input type= "submit" value= "{{label}}" disabled= "disabled" />
+							{{else}}
+								<input type= "text" name= "{{classValue}}" />
+							{{/if}}
+						{{/if}}
+					</dd>
+				</dl>
+			{{/each}}
+		</form>
+	</section>
+</script>
+
+
+<!-- Footer template -->
+<script id= "footer-template" type= "text/x-handlebars-template">
+	<h2 class= "logo"><a href= "#slider">{{title}}</a></h2>
+	
+	<p class= "copyright-data">{{{copyright}}}</p>
+	
+	<section id= "social-net-links">
+		<h6>{{socialNets.title}}</h6>
+		<ul class= "nav">
+			{{#each socialNets.links}}
+				<li class= "{{classValue}}"><a class= "button" href= "{{url}}">{{label}}</a></li>
+			{{/each}}
+		</ul>
+	</section>
+	
+	{{#if image.source}}
+		<figure class= "cover-image" style= "background-image: url( ./images/footer/{{image.source}} )">
+			<img src= "images/footer/{{image.source}}" alt= "" />
+		</figure>
+	{{/if}}
+</script>
+
+<!-- Website stylesheets, uncommonly placed at the bottom to speed up page rendering -->
+<link href= "plugins/slick-1.6.0/slick/slick.css" rel= "stylesheet" />	
+<link href= "css/style.css" type= "text/css" rel= "stylesheet" />
+
+<!-- slickSlider, providing slider functionality for the slider, about, services and contact info sections -->
+<script src= "plugins/slick-1.6.0/slick/slick.min.js" type= "text/javascript"></script>
+<!-- UIkit, providing smooth scrolling functionallity -->
+<script src= "plugins/uikit-3.0.0-rc.10/js/uikit.min.js" type= "text/javascript"></script>
+<!-- Project scripts -->
+<script src= "js/constants.js" type= "text/javascript"></script>
+<script src= "js/functions.js" type= "text/javascript"></script>
+<script src= "js/project.js" type= "text/javascript"></script>
+<script src= "js/custom.js" type= "text/javascript"></script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
